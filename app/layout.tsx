@@ -1,9 +1,16 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 import { Provider } from "@/providers/wagmiProvider";
+import SideBar from "./_components/SideBar";
 
-const inter = Inter({ subsets: ["latin"] });
+//web3 modal
+import { headers } from "next/headers";
+import { cookieToInitialState } from "wagmi";
+import { config } from "@/config";
+import Web3ModalProvider from "@/context";
+
+const bricolage = Bricolage_Grotesque({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,10 +22,21 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const initialState = cookieToInitialState(config, headers().get("cookie"));
+
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Provider>{children}</Provider>
+      <body className={bricolage.className}>
+        {/* <Provider> */}
+        <Web3ModalProvider initialState={initialState}>
+          <div className="flex gap-10 w-full h-full py-4">
+            <SideBar />
+            <div className="bg-[#18181B] rounded-2xl w-full">
+              <div className="w-11/12 mx-auto py-4">{children}</div>
+            </div>
+          </div>
+        </Web3ModalProvider>
+        {/* </Provider> */}
       </body>
     </html>
   );
