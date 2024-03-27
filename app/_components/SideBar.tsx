@@ -1,5 +1,5 @@
 "use client";
-import { Cog, CreditCard, Home, Search } from "lucide-react";
+import { Box, Cog, CreditCard, Home, Search } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { usePathname } from "next/navigation";
@@ -7,8 +7,8 @@ import { usePathname } from "next/navigation";
 export default function SideBar() {
   const pathname = usePathname();
   return (
-    <div className="min-w-80 max-w-sm h-full">
-      <div className="space-y-5 w-10/12 mx-auto">
+    <div className="w-full max-w-96 h-full">
+      <div className="space-y-5 w-10/12 mx-auto h-full flex flex-col items-stretch">
         <h5 className="text-4xl p-4 font-semibold text-[#FFB72D]">Botanix</h5>
         {[
           {
@@ -27,6 +27,11 @@ export default function SideBar() {
             icon: <CreditCard />,
           },
           {
+            name: "Deploy Contract",
+            href: "/deploy",
+            icon: <Box />,
+          },
+          {
             name: "Settings",
             href: "/settings",
             icon: <Cog />,
@@ -34,15 +39,16 @@ export default function SideBar() {
         ].map((e) => (
           <Link
             href={e.href}
-            className={`flex items-center gap-x-2.5 hover:bg-white/20 rounded-lg px-3 py-2.5 ${
-              pathname === e.href ? "bg-white/20" : ""
+            className={`flex items-center gap-x-2.5 hover:bg-[#d1c5ad]/30 rounded-lg px-3 py-2.5 ${
+              pathname === e.href ? "bg-[#d1c5ad]/50" : ""
             }`}
           >
-            <div className="text-[#FFB72D]">{e.icon}</div>
+            <div className={`text-[#FFB72D]`}>{e.icon}</div>
             <div>{e.name}</div>
           </Link>
         ))}
-        <div className="w-full bg-white/20 rounded-xl py-3 text-center flex justify-center">
+        <div className="flex-1" />
+        <div className="w-full bg-white/30 rounded-xl p-3 text-center flex justify-center">
           <w3m-button balance="hide" size="md" label="Connect" />
         </div>
       </div>

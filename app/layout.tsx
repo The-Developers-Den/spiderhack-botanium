@@ -29,10 +29,12 @@ export default function RootLayout({
       <body className={bricolage.className}>
         {/* <Provider> */}
         <Web3ModalProvider initialState={initialState}>
-          <div className="flex gap-10 w-full h-full py-4">
+          <div className="flex w-full h-screen py-4">
             <SideBar />
-            <div className="bg-[#18181B] rounded-2xl w-full">
-              <div className="w-11/12 mx-auto py-4">{children}</div>
+            <div className="rounded-2xl w-full">
+              <div className="w-[98%] h-full overflow-auto py-4 bg-[#231E17] rounded-2xl">
+                {children}
+              </div>
             </div>
           </div>
         </Web3ModalProvider>
