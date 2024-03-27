@@ -1,5 +1,6 @@
 import { defineChain } from "viem";
 
+//TODO: add mainnet and chain
 export const spiderChain = defineChain({
   id: 3636,
   testnet: true,
