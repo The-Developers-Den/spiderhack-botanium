@@ -31,7 +31,7 @@ export default function RootLayout({
         <Web3ModalProvider initialState={initialState}>
           <div className="flex w-full h-screen py-4">
             <SideBar />
-            <div className="rounded-2xl w-full">
+            <div className="rounded-2xl flex-1 w-full">
               <div className="w-[98%] h-full overflow-auto py-4 bg-[#231E17] rounded-2xl">
                 {children}
               </div>
