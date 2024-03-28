@@ -32,7 +32,7 @@ export default function RootLayout({
           <div className="flex w-full h-screen py-4">
             <SideBar />
             <div className="rounded-2xl flex-1 w-full">
-              <div className="w-[98%] h-full overflow-auto py-4 bg-[#231E17] rounded-2xl">
+              <div className="w-[98%] h-full overflow-auto py-4 bg-[#18181B] rounded-2xl">
                 {children}
               </div>
             </div>
