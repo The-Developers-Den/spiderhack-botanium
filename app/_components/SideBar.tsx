@@ -47,8 +47,8 @@ export default function SideBar() {
         ].map((e) => (
           <Link
             href={e.href}
-            className={`flex items-center gap-x-2.5 hover:bg-[#3f3f3f]/60 rounded-lg px-3 py-2.5 ${
-              pathname === e.href ? "bg-[#3f3f3f]" : ""
+            className={`flex items-center gap-x-2.5 hover:bg-[#27272A]/60 rounded-lg px-3 py-2.5 ${
+              pathname === e.href ? "bg-[#27272A]" : ""
             }`}
           >
             <div className={`${e.color}`}>{e.icon}</div>
@@ -56,7 +56,7 @@ export default function SideBar() {
           </Link>
         ))}
         <div className="flex-1" />
-        <div className="w-full bg-[#3f3f3f] rounded-xl p-3 text-center flex justify-center">
+        <div className="w-full bg-[#27272A] rounded-xl p-3 text-center flex justify-center">
           <w3m-button balance="hide" size="md" label="Connect" />
         </div>
       </div>
