@@ -3,13 +3,38 @@ import { Box, Cog, CreditCard, Home, Search } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { usePathname } from "next/navigation";
+import {
+  ConnectWallet,
+  useAddress,
+  useEmbeddedWallet,
+  useWallet,
+} from "@thirdweb-dev/react";
 
 export default function SideBar() {
+  const { connect } = useEmbeddedWallet();
+
+  const address = useAddress();
+
+  console.log(address);
+
+  const signInWithGoogle = async () => {
+    await connect({
+      strategy: "google",
+    });
+  };
+  const signInWithApple = async () => {
+    await connect({
+      strategy: "apple",
+    });
+  };
   const pathname = usePathname();
   return (
+    
     <div className="w-full max-w-96 h-full">
       <div className="space-y-5 w-10/12 mx-auto h-full flex flex-col items-stretch">
-        <h5 className="text-4xl p-4 font-semibold text-[#FFB72D]">Botanix AI</h5>
+        <h5 className="text-4xl p-4 font-semibold text-[#FFB72D]">
+          Botanix AI
+        </h5>
         {[
           {
             name: "Home",
@@ -57,7 +82,9 @@ export default function SideBar() {
         ))}
         <div className="flex-1" />
         <div className="w-full bg-[#27272A] rounded-xl p-3 text-center flex justify-center">
-          <w3m-button balance="hide" size="md" label="Connect" />
+          {/* <w3m-button balance="hide" size="md" label="Connect" /> */}
+          <button onClick={signInWithGoogle}>google</button>
+          <ConnectWallet />
         </div>
       </div>
     </div>
