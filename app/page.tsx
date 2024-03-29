@@ -37,7 +37,7 @@ export default function Home() {
         <div className="space-y-4">
           {[
             {
-              name: "Ask Brian",
+              name: "Ask Botanix AI",
               desc: "Explore the web3 ecosystem and find the resources that you need.",
               href: "/",
               color: "text-blue-400 bg-blue-700",
