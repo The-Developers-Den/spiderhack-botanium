@@ -55,7 +55,7 @@ export default function Page() {
       </div>
       <div className="w-[98%] h-[90%] mx-auto flex flex-col">
         <div className="flex-1 overflow-scroll py-8 space-y-10">
-          {messages.reverse().map(({ role, content }, index) => (
+          {messages.map(({ role, content }, index) => (
             <div key={index} className="max-w-2xl flex items-center gap-4">
               {role === "user" ? (
                 <div className="p-3 bg-[#3f3f46] rounded-full">
