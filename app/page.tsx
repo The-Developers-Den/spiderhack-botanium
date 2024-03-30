@@ -1,12 +1,12 @@
 "use client";
 
-import { useConnect, useSwitchChain } from "wagmi";
+// import { useConnect, useSwitchChain } from "wagmi";
 import { Button } from "./_components/ui/button";
 import { Cog, CreditCard, Search, ArrowRight, Box, Orbit } from "lucide-react";
 
 export default function Home() {
-  const { connectors, connect } = useConnect();
-  const { chains, switchChain } = useSwitchChain();
+  // const { connectors, connect } = useConnect();
+  // const { chains, switchChain } = useSwitchChain();
   return (
     <main className="flex flex-col items-center justify-center h-full">
       {/* {connectors.map((connector) => (
