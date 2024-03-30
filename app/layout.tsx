@@ -3,6 +3,7 @@ import { Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 import { Provider } from "@/providers/thirdwebProvider";
 import SideBar from "./_components/SideBar";
+import Wrapper from "./_components/Wrapper";
 
 const bricolage = Bricolage_Grotesque({ subsets: ["latin"] });
 
@@ -19,16 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={bricolage.className}>
-        <Provider>
-          <div className="flex w-full h-screen py-4">
-            <SideBar />
-            <div className="rounded-2xl flex-1 w-full">
-              <div className="w-[98%] h-full overflow-auto py-4 bg-[#18181B] rounded-2xl">
-                {children}
-              </div>
-            </div>
-          </div>
-        </Provider>
+        <Wrapper>{children}</Wrapper>
       </body>
     </html>
   );
