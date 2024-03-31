@@ -154,11 +154,6 @@ export default function SideBar() {
             client={client}
             chain={botanixChain}
             wallets={[embeddedWallet()]}
-            accountAbstraction={{
-              chain: botanixChain,
-              factoryAddress: FACTORY_ADDRESS_CONTRACT,
-              gasless: true,
-            }}
           />
         </div>
       </div>
