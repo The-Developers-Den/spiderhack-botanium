@@ -11,12 +11,12 @@ export async function POST(request: Request) {
 
   try {
     const res = await fetch(
-      "https://api.brianknows.org/api/v0/agent/knowledge",
+      "https://api.botanium/api/v0/agent/knowledge",
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-brian-api-key": "brian_aKiiVFoBLuLvgNFSB",
+          "x-botanium-api-key": process.env.BOTANIUM_API_KEY,
         },
         body: JSON.stringify({ prompt }),
       }
