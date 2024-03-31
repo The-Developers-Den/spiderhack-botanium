@@ -1,10 +1,7 @@
-//@ts-nocheck
-
 "use client";
 import { BadgeCheck } from "lucide-react";
 import Image from "next/image";
 import React from "react";
-import { Button } from "../_components/ui/button";
 import { TransactionButton, useActiveAccount } from "thirdweb/react";
 import { claimTo } from "thirdweb/extensions/erc721";
 import { contract } from "@/providers/thirdwebProvider";
@@ -15,8 +12,8 @@ export default function Page() {
     <div className="w-[95%] mx-auto h-full py-4 space-y-6">
       <h4 className="text-3xl font-semibold">Botanium AI NFTs</h4>
       <div className="flex flex-wrap gap-20">
-        {[1, 2, 3, 4, 5, 6].map((nft) => (
-          <div className="w-[200px] border border-[#252F45] rounded-xl">
+        {[1, 2, 3, 4, 5, 6, 7].map((nft) => (
+          <div className="min-w-64 border border-[#252F45] rounded-xl">
             <Image
               src={`/${nft}.jpg`}
               className="rounded-t-xl h-30"
