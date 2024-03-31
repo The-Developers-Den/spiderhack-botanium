@@ -1,4 +1,4 @@
-# Huddlerr
+# Botanium AI
 ![hackathon-banner](https://cdn.dorahacks.io/static/files/18d6b6e7fece5b6b2716ab64e5ab30b1.jpg@512h.webp)
 
 ## About
