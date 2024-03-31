@@ -2,7 +2,15 @@
 
 // import { useConnect, useSwitchChain } from "wagmi";
 import { Button } from "./_components/ui/button";
-import { Cog, CreditCard, Search, ArrowRight, Box, Orbit } from "lucide-react";
+import {
+  Cog,
+  CreditCard,
+  Search,
+  ArrowRight,
+  Box,
+  Orbit,
+  BotMessageSquare,
+} from "lucide-react";
 
 export default function Home() {
   // const { connectors, connect } = useConnect();
@@ -45,11 +53,11 @@ export default function Home() {
             },
             {
               name: "Send Transaction",
-              desc: "Send transactions to the network and view their status.",
+              desc: "Send transactions, check your balance, and much more.",
               href: "/modal",
               color: "text-green-500 bg-green-700",
 
-              icon: <CreditCard />,
+              icon: <BotMessageSquare />,
             },
             {
               name: "Botanium AI NFTs",

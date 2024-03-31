@@ -259,7 +259,7 @@ export default function Page() {
           <div className="space-y-1.5 px-6 border-b border-[#444444] py-3">
             <h5 className="text-3xl mx-auto">Send transactions</h5>
             <p className="text-lg opacity-80  mx-auto">
-              Swap your tokens, bridge them across many chains, and much more.
+              Send transactions, check your balance, and much more.
             </p>
           </div>
           <div className="w-[98%] h-[90%] mx-auto flex flex-col">

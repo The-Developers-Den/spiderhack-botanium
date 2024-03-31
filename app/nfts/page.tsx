@@ -9,7 +9,7 @@ import { contract } from "@/providers/thirdwebProvider";
 import { getNFTs } from "thirdweb/extensions/erc721";
 
 export default function Page() {
-  const [nfts, setNfts] = useState();
+  const [nfts, setNfts] = useState<any[]>();
   const account = useActiveAccount();
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export default function Page() {
     claim();
   }, []);
 
-  const getNftImageUrl = (img) => {
+  const getNftImageUrl = (img: string) => {
     if (!img) return "/images/nfts/default.png";
 
     if (img.startsWith("ipfs://ipfs/")) {
@@ -48,7 +48,7 @@ export default function Page() {
       <div className="flex flex-wrap gap-20">
         {nfts &&
           nfts?.map(
-            ({ metadata, id }) => (
+            ({ metadata, id }: { metadata: any; id: string }) => (
               console.log(metadata.image),
               (
                 <div
