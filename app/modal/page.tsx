@@ -15,6 +15,7 @@ import { client } from "@/providers/thirdwebProvider";
 import { botanixChain } from "@/constants/chains";
 import { Account, getWalletBalance } from "thirdweb/wallets";
 import { isAddress } from "thirdweb/utils";
+import { useActiveWallet } from "thirdweb/react";
 
 const formSchema = z.object({
   inputTxt: z.string().min(2).max(100),
@@ -35,8 +36,7 @@ export default function Page() {
       },
     ]
   );
-  // const wallet = useActiveWallet();
-  const wallet = true;
+  const wallet = useActiveWallet();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
