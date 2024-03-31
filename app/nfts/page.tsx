@@ -15,21 +15,21 @@ export default function Page() {
     <div className="w-[95%] mx-auto h-full py-4 space-y-6">
       <h4 className="text-3xl font-semibold">Botanium AI NFTs</h4>
       <div className="flex flex-wrap gap-20">
-        {[1, 2, 3, 4, 5, 6, 7].map((nft) => (
-          <div className="w-64 border border-[#252F45] rounded-xl">
+        {[1, 2, 3, 4, 5, 6].map((nft) => (
+          <div className="w-[200px] border border-[#252F45] rounded-xl">
             <Image
               src={`/${nft}.jpg`}
-              className="rounded-t-xl h-40"
+              className="rounded-t-xl h-30"
               width={300}
               height={300}
               alt="NFT"
             />
             <div className=" px-2.5 pt-4 pb-3 space-y-4 bg-[#252F45] rounded-b-xl text-white">
               <div className="flex justify-between items-center">
-                <p className="text-white/90">{`BotaniumAI#${nft}`}</p>
+                <p className="text-white/90 text-sm">{`BotaniumAI#${nft}`}</p>
                 <div className="text-white/70 flex items-center gap-1.5">
-                  <p className="font-light">@botanium</p>
-                  <BadgeCheck className="text-green-600 w-5" />
+                  <p className="font-light text-base">@botanium</p>
+                  <BadgeCheck className="text-green-600 w-3" />
                 </div>
               </div>
 

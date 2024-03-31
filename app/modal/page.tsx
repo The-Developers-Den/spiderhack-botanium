@@ -1,20 +1,26 @@
-//@ts-nocheck
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { Form, FormField, FormItem } from "../_components/ui/form";
 import { Input } from "../_components/ui/input";
 import { Button } from "../_components/ui/button";
+import { TransactionButton, useActiveAccount } from "thirdweb/react";
 import { Bot, User } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-// import { useActiveWallet } from "thirdweb/react";
+import { isValidWalletAddress, findToken } from "../../lib/utils";
+import { getContract, sendTransaction } from "thirdweb";
+import { transfer } from "thirdweb/extensions/erc20";
+import { client } from "@/providers/thirdwebProvider";
+import { botanixChain } from "@/constants/chains";
+import { Account } from "thirdweb/wallets";
 
 const formSchema = z.object({
-  inputTxt: z.string().min(2).max(50),
+  inputTxt: z.string().min(2).max(100),
 });
 
 export default function Page() {
+  const account = useActiveAccount();
   const [messages, setMessages] = useState<{ role: string; content: string }[]>(
     [
       {
@@ -69,8 +75,6 @@ export default function Page() {
 
     const data = await fetchExtracts(values.inputTxt);
 
-    console.log(data, "data");
-
     if (!data.length) {
       setMessages([
         ...newMessages,
@@ -82,6 +86,17 @@ export default function Page() {
           role: "bot",
           content:
             "You can search for tokens, swap them, bridge them across many chains, and much more.",
+        },
+      ]);
+      return;
+    }
+
+    if (!isValidWalletAddress(data[0].address)) {
+      setMessages([
+        ...newMessages,
+        {
+          role: "bot",
+          content: "Invalid address, pls try again",
         },
       ]);
       return;
@@ -115,13 +130,46 @@ export default function Page() {
         ]);
         break;
       case "transfer":
+        const tokenAddress = findToken(data[0].token1);
+        if (!tokenAddress) {
+          setMessages([
+            ...newMessages,
+            {
+              role: "bot",
+              content: "Token not found, pls try again",
+            },
+          ]);
+          return;
+        }
         setMessages([
           ...newMessages,
           {
             role: "bot",
-            content: "Coming soon!",
+            content: `You are trasfering ${data[0].amount} ${data[0].token1} to ${data[0].address}`,
           },
         ]);
+
+        // get the contract
+        const contract = getContract({
+          address: tokenAddress,
+          chain: botanixChain,
+          client,
+        });
+
+        // Call the extension function to prepare the transaction
+        const transaction = transfer({
+          contract,
+          to: data[0].address,
+          amount: data[0].amount,
+        });
+
+        console.log(transaction, data[0].address, data[0].amount, contract);
+        // Send the transaction
+        const transactionResult = await sendTransaction({
+          transaction,
+          account: account as Account,
+        });
+        console.log(transactionResult);
         break;
       case "balance":
         setMessages([
