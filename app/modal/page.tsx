@@ -10,12 +10,11 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { isValidWalletAddress, findToken } from "../../lib/utils";
 import { getContract, sendTransaction } from "thirdweb";
-import { transfer, balanceOf, decimals } from "thirdweb/extensions/erc20";
+import { transfer } from "thirdweb/extensions/erc20";
 import { client } from "@/providers/thirdwebProvider";
 import { botanixChain } from "@/constants/chains";
-import { Account } from "thirdweb/wallets";
-import { toTokens, isAddress } from "thirdweb/utils";
-import { getWalletBalance } from "thirdweb/wallets";
+import { Account, getWalletBalance } from "thirdweb/wallets";
+import { isAddress } from "thirdweb/utils";
 
 const formSchema = z.object({
   inputTxt: z.string().min(2).max(100),
@@ -201,7 +200,7 @@ export default function Page() {
 
         const balance = await getWalletBalance({
           address: acc,
-          tokenAddress: tokenAdd,
+          tokenAddress: tokenAdd ?? undefined,
           client,
           chain: botanixChain,
         });
