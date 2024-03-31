@@ -16,7 +16,7 @@ export default function Page() {
       <h4 className="text-3xl font-semibold">Botanium AI NFTs</h4>
       <div className="flex flex-wrap gap-20">
         {[1, 2, 3, 4, 5, 6, 7].map((nft) => (
-          <div className="w-64 border border-[#252F45] rounded-xl">
+          <div className="min-w-64 border border-[#252F45] rounded-xl">
             <Image
               src={`/${nft}.jpg`}
               className="rounded-t-xl h-40"

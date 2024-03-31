@@ -181,7 +181,7 @@ export default function Page() {
               className="flex-1 overflow-scroll py-10 space-y-10"
               ref={containerRef}
             >
-              {messages.reverse().map(({ role, content }, index) => (
+              {messages.map(({ role, content }, index) => (
                 <div
                   key={index}
                   className={`w-full flex items-center gap-4 ${
