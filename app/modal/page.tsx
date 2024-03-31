@@ -36,7 +36,7 @@ export default function Page() {
       inputTxt: "",
     },
   });
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     scrollToBottom();
@@ -44,7 +44,6 @@ export default function Page() {
 
   const scrollToBottom = () => {
     if (containerRef.current) {
-      //ts-ignore
       containerRef.current.scrollTop = containerRef.current.scrollHeight;
     }
   };
