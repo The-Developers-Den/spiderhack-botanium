@@ -35,19 +35,19 @@ export default function SideBar() {
 
             icon: <CreditCard />,
           },
-          {
-            name: "Deploy Contract",
-            href: "/deploy",
-            color: "text-purple-500",
+          // {
+          //   name: "Deploy Contract",
+          //   href: "/deploy",
+          //   color: "text-purple-500",
 
-            icon: <Box />,
-          },
+          //   icon: <Box />,
+          // },
           {
             name: "Botanium AI NFTs",
             href: "/nfts",
-            color: "text-indigo-500",
+            color: "text-purple-500",
 
-            icon: <Image size={24} />,
+            icon: <Box />,
           },
           {
             name: "Settings",
