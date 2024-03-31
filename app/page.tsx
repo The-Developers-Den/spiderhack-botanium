@@ -52,9 +52,9 @@ export default function Home() {
               icon: <CreditCard />,
             },
             {
-              name: "Deploy Contract (Coming soon)",
-              desc: "Deploy smart contracts on the network and view their status.",
-              href: "/",
+              name: "Botanium AI NFTs",
+              desc: "Grad your Botanium AI NFTs.",
+              href: "/nfts",
               color: "text-purple-500 bg-purple-700",
 
               icon: <Box />,

@@ -1,3 +1,4 @@
+//@ts-nocheck
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { Form, FormField, FormItem } from "../_components/ui/form";
@@ -167,7 +168,7 @@ export default function Page() {
           Connect your wallet
         </div>
       ) : (
-        <div className="h-full max-h-full relative overflow-y-clip">
+        <div className="h-full max-h-full w-full relative overflow-y-clip">
           <div className="space-y-1.5 px-6 border-b border-[#444444] py-3">
             <h5 className="text-3xl mx-auto">Send transactions</h5>
             <p className="text-lg opacity-80  mx-auto">
@@ -183,7 +184,7 @@ export default function Page() {
               {messages.reverse().map(({ role, content }, index) => (
                 <div
                   key={index}
-                  className={`max-w-2xl flex items-center gap-4 ${
+                  className={`w-full flex items-center gap-4 ${
                     role === "user" ? "justify-end" : "justify-start"
                   }`}
                 >
@@ -195,7 +196,7 @@ export default function Page() {
                       <p className="mx-4">{content}</p>
                     </div>
                   ) : (
-                    <div className="flex justify-center items-center">
+                    <div className="flex mx-4 w-11/12 max-w-7xl items-center">
                       <div className="p-3 bg-blue-500 rounded-full">
                         <Bot />
                       </div>
