@@ -51,3 +51,10 @@ body {
     text-wrap: balance;
   }
 }
+
+.tw-connect-wallet {
+  @apply !w-72 rounded-xl font-light bg-[#18181B];
+}
+.css-1g5k5ll {
+  @apply box-content !px-3 !py-1.5 !w-fit !justify-evenly;
+}

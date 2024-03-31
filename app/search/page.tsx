@@ -38,6 +38,7 @@ export default function Page() {
 
   const scrollToBottom = () => {
     if (containerRef.current) {
+      //ts-ignore
       containerRef.current.scrollTop = containerRef.current.scrollHeight;
     }
   };

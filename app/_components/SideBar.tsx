@@ -1,10 +1,10 @@
 "use client";
-import { Box, Cog, CreditCard, Home, Search } from "lucide-react";
+import { Box, Cog, CreditCard, Home, Image, Search } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { usePathname } from "next/navigation";
-import { ConnectButton } from "thirdweb/react";
-import { embeddedWallet } from "thirdweb/wallets";
+import { ConnectButton, darkTheme } from "thirdweb/react";
+import { embeddedWallet, injectedProvider } from "thirdweb/wallets";
 import { client } from "@/providers/thirdwebProvider";
 import { FACTORY_ADDRESS_CONTRACT } from "@/constants/contracts";
 import { botanixChain } from "@/constants/chains";
@@ -43,6 +43,13 @@ export default function SideBar() {
             icon: <Box />,
           },
           {
+            name: "Botanium AI NFTs",
+            href: "/nfts",
+            color: "text-indigo-500",
+
+            icon: <Image size={24} />,
+          },
+          {
             name: "Settings",
             href: "/settings",
             color: "text-[#FFB72D]",
@@ -62,7 +69,7 @@ export default function SideBar() {
           </Link>
         ))}
         <div className="flex-1" />
-        <div className="w-full bg-[#27272A] rounded-xl p-3 text-center flex justify-center">
+        <div className="w-full bg-[#27272A] rounded-lg p-3 py-3.5 text-center flex justify-center">
           {/* <Dialog>
             <DialogTrigger>Connect</DialogTrigger>
             <DialogContent>
@@ -136,6 +143,14 @@ export default function SideBar() {
           )} */}
 
           <ConnectButton
+            theme={darkTheme({
+              colors: {
+                primaryButtonBg: "#18181B",
+                primaryButtonText: "#f0f0f0",
+                selectedTextBg: "#18181b",
+              },
+            })}
+            autoConnect={true}
             client={client}
             chain={botanixChain}
             wallets={[embeddedWallet()]}
