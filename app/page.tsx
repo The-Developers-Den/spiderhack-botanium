@@ -13,25 +13,8 @@ import {
 } from "lucide-react";
 
 export default function Home() {
-  // const { connectors, connect } = useConnect();
-  // const { chains, switchChain } = useSwitchChain();
   return (
     <main className="flex flex-col items-center justify-center h-full">
-      {/* {connectors.map((connector) => (
-        <button key={connector.uid} onClick={() => connect({ connector })}>
-          {connector.name}
-        </button>
-      ))}
-      <div>
-        {chains.map((chain:any) => (
-          <button
-            key={chain.id}
-            onClick={() => switchChain({ chainId: chain.id })}
-          >
-            {chain.name}
-          </button>
-        ))}
-      </div> */}
       <div className="space-y-6">
         <div className="space-y-2">
           <h1 className="text-center font-black text-5xl">
@@ -39,7 +22,7 @@ export default function Home() {
           </h1>
           <h2 className="text-center opacity-80 text-2xl max-w-3xl">
             Search information, execute transactions, and deploy smart contracts
-            by chatting with Brian.
+            by chatting with Botanium AI.
           </h2>
         </div>
         <div className="space-y-4">
