@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Huddlerr
+![hackathon-banner](https://cdn.dorahacks.io/static/files/18d6b6e7fece5b6b2716ab64e5ab30b1.jpg@512h.webp)
 
-## Getting Started
+## About
 
-First, run the development server:
+### Participants
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+| Name            | Github                                         |
+| --------------- | ---------------------------------------------- |
+| Pratham Singhal | [@Pratham-19](https://github.com/Pratham-19)   | 
+|Chandra Bose     | [@ChandarBoseP](https://github.com/chandrabosep)|
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Description
+## The problem Huddlerr solves
+Botanium, the cognitive powerhouse of web3, aims to empower users of all levels, from beginners to experts, to effortlessly engage with the web3 ecosystem using simple English prompts.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Preview
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+https://www.loom.com/share/7cfebe5632c14d4f82939138acdc66f9
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Description
 
-## Deploy on Vercel
+Welcome to Botanium AI, where we've revolutionized the way users interact with the Botanix ecosystem. Our platform is built around three core components.
+Account abstraction smart wallet
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Botanium AI
+
+Seamless transaction capabilities - to provide users with an intuitive and efficient experience.
+User Onboarding with Smart Wallet Integration
+We understand that simplicity and security are paramount when introducing users to Web3. That's why we've implemented an account abstraction smart wallet solution. Through our platform, users can effortlessly create their wallet addresses with just a few clicks, eliminating the complexities of traditional setup processes. Our smart wallet ensures users maintain full control over their funds while offering a user-friendly interface for managing transactions within the Botanix ecosystem.
+
+### Botanium AI for Clarifying Doubts
+
+Navigating the intricacies of the Botanix ecosystem can sometimes be daunting. To alleviate concerns and provide clarity, we've integrated Botanium AI - an advanced AI system capable of addressing a wide range of queries related to Botanix. Whether it's understanding feature functionalities, transaction security, or staying updated on ecosystem developments, Botanium AI delivers clear and accurate responses in real-time. With Botanium AI by your side, you can confidently explore the Botanix ecosystem and make informed decisions.
+
+### Sending Transactions and Bridging Funds
+Empowered with a seamless user interface and comprehensive AI support, users can effortlessly initiate transactions within the Botanix ecosystem. Our platform simplifies the process of sending transactions, enabling users to transfer funds seamlessly across networks or bridge assets between different chains. With just a simple text command, such as send 1 BTC to chandrabose.eth on Botanix mainnet users can securely execute transactions and unlock the full potential of the Botanix ecosystem.
+
+Join us on our mission to redefine the Web3 experience. With user-friendly onboarding, AI-driven assistance, and streamlined transaction capabilities, we're dedicated to making the Botanix ecosystem accessible and inclusive for all users.
