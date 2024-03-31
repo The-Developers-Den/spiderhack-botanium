@@ -31,7 +31,7 @@ export default function Page() {
       {
         role: "bot",
         content:
-          "You can search for tokens, swap them, bridge them across many chains, and much more.",
+          "You can search for your balance,do transactions and much more.",
       },
     ]
   );
@@ -109,6 +109,7 @@ export default function Page() {
             content: `2. ${data[0].token2}`,
           },
         ]);
+
         break;
       case "bridge":
         setMessages([
@@ -223,7 +224,7 @@ export default function Page() {
           {
             role: "bot",
             content:
-              "You can search for tokens, swap them, bridge them across many chains, and much more.",
+              "You can search for balance,do transactions and much more.",
           },
         ]);
     }
