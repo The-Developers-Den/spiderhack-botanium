@@ -7,9 +7,6 @@ export function cn(...inputs: ClassValue[]) {
 }
 export function findToken(query: string): string | null {
   const queryLowerCase = query.toLowerCase();
-  if (queryLowerCase === "btc") {
-    return "0x";
-  }
   for (const token of tokens) {
     if (
       token.name.toLowerCase() === queryLowerCase ||

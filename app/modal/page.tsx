@@ -15,6 +15,7 @@ import { client } from "@/providers/thirdwebProvider";
 import { botanixChain } from "@/constants/chains";
 import { Account } from "thirdweb/wallets";
 import { toTokens, isAddress } from "thirdweb/utils";
+import { getWalletBalance } from "thirdweb/wallets";
 
 const formSchema = z.object({
   inputTxt: z.string().min(2).max(100),
@@ -176,7 +177,7 @@ export default function Page() {
         break;
       case "balance":
         const tokenAdd = findToken(data[0].token1);
-        if (!tokenAdd) {
+        if (!tokenAdd && data[0].token1.toLowerCase() !== "btc") {
           setMessages([
             ...newMessages,
             {
@@ -193,30 +194,23 @@ export default function Page() {
             content: `Checking balance of ${data[0].token1}`,
           },
         ]);
-        const tokenContract = getContract({
-          address: tokenAdd,
-          chain: botanixChain,
-          client,
-        });
 
         const acc = isAddress(data[0].address)
           ? data[0].address
           : account?.address;
 
-        const balance = await balanceOf({
-          contract: tokenContract,
+        const balance = await getWalletBalance({
           address: acc,
+          tokenAddress: tokenAdd,
+          client,
+          chain: botanixChain,
         });
-        const tokenDecimals = await decimals({ contract: tokenContract });
 
         setMessages([
           ...newMessages,
           {
             role: "bot",
-            content: `Balance of ${acc} is ${toTokens(
-              balance,
-              tokenDecimals
-            )} ${data[0].token1}`,
+            content: `Balance of ${acc} is ${balance.displayValue} ${balance.symbol}`,
           },
         ]);
         break;
