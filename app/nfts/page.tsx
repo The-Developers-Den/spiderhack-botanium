@@ -1,5 +1,3 @@
-//@ts-nocheck
-
 "use client";
 import { BadgeCheck } from "lucide-react";
 import Image from "next/image";

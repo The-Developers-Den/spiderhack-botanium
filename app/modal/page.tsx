@@ -1,20 +1,27 @@
-//@ts-nocheck
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { Form, FormField, FormItem } from "../_components/ui/form";
 import { Input } from "../_components/ui/input";
 import { Button } from "../_components/ui/button";
+import { useActiveAccount } from "thirdweb/react";
 import { Bot, User } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-// import { useActiveWallet } from "thirdweb/react";
+import { isValidWalletAddress, findToken } from "../../lib/utils";
+import { getContract, sendTransaction } from "thirdweb";
+import { transfer, balanceOf, decimals } from "thirdweb/extensions/erc20";
+import { client } from "@/providers/thirdwebProvider";
+import { botanixChain } from "@/constants/chains";
+import { Account } from "thirdweb/wallets";
+import { toTokens, isAddress } from "thirdweb/utils";
 
 const formSchema = z.object({
-  inputTxt: z.string().min(2).max(50),
+  inputTxt: z.string().min(2).max(100),
 });
 
 export default function Page() {
+  const account = useActiveAccount();
   const [messages, setMessages] = useState<{ role: string; content: string }[]>(
     [
       {
@@ -69,8 +76,6 @@ export default function Page() {
 
     const data = await fetchExtracts(values.inputTxt);
 
-    console.log(data, "data");
-
     if (!data.length) {
       setMessages([
         ...newMessages,
@@ -115,20 +120,103 @@ export default function Page() {
         ]);
         break;
       case "transfer":
+        if (!isValidWalletAddress(data[0].address)) {
+          setMessages([
+            ...newMessages,
+            {
+              role: "bot",
+              content: "Invalid address, pls try again",
+            },
+          ]);
+          return;
+        }
+        const tokenAddress = findToken(data[0].token1);
+        if (!tokenAddress) {
+          setMessages([
+            ...newMessages,
+            {
+              role: "bot",
+              content: "Token not found, pls try again",
+            },
+          ]);
+          return;
+        }
         setMessages([
           ...newMessages,
           {
             role: "bot",
-            content: "Coming soon!",
+            content: `You are trasfering ${data[0].amount} ${data[0].token1} to ${data[0].address}`,
+          },
+        ]);
+
+        const contract = getContract({
+          address: tokenAddress,
+          chain: botanixChain,
+          client,
+        });
+
+        const transaction = transfer({
+          contract,
+          to: data[0].address,
+          amount: data[0].amount,
+        });
+
+        const transactionResult = await sendTransaction({
+          transaction,
+          account: account as Account,
+        });
+
+        setMessages([
+          ...newMessages,
+          {
+            role: "bot",
+            content: `Transaction sent: ${transactionResult.transactionHash}`,
           },
         ]);
         break;
       case "balance":
+        const tokenAdd = findToken(data[0].token1);
+        if (!tokenAdd) {
+          setMessages([
+            ...newMessages,
+            {
+              role: "bot",
+              content: "Token not found, pls try again",
+            },
+          ]);
+          return;
+        }
         setMessages([
           ...newMessages,
           {
             role: "bot",
-            content: "Coming soon!",
+            content: `Checking balance of ${data[0].token1}`,
+          },
+        ]);
+        const tokenContract = getContract({
+          address: tokenAdd,
+          chain: botanixChain,
+          client,
+        });
+
+        const acc = isAddress(data[0].address)
+          ? data[0].address
+          : account?.address;
+
+        const balance = await balanceOf({
+          contract: tokenContract,
+          address: acc,
+        });
+        const tokenDecimals = await decimals({ contract: tokenContract });
+
+        setMessages([
+          ...newMessages,
+          {
+            role: "bot",
+            content: `Balance of ${acc} is ${toTokens(
+              balance,
+              tokenDecimals
+            )} ${data[0].token1}`,
           },
         ]);
         break;
@@ -175,7 +263,6 @@ export default function Page() {
             </p>
           </div>
           <div className="w-[98%] h-[90%] mx-auto flex flex-col">
-            {/* <div className="flex-1 overflow-scroll py-8 space-y-10"> */}
             <div
               className="flex-1 overflow-scroll py-10 space-y-10"
               ref={containerRef}
@@ -205,7 +292,6 @@ export default function Page() {
                 </div>
               ))}
             </div>
-            {/* </div> */}
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
