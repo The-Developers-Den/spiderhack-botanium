@@ -3,17 +3,18 @@ import React, { useState, useEffect, useRef } from "react";
 import { Form, FormField, FormItem } from "../_components/ui/form";
 import { Input } from "../_components/ui/input";
 import { Button } from "../_components/ui/button";
-import { TransactionButton, useActiveAccount } from "thirdweb/react";
+import { useActiveAccount } from "thirdweb/react";
 import { Bot, User } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { isValidWalletAddress, findToken } from "../../lib/utils";
 import { getContract, sendTransaction } from "thirdweb";
-import { transfer } from "thirdweb/extensions/erc20";
+import { transfer, balanceOf, decimals } from "thirdweb/extensions/erc20";
 import { client } from "@/providers/thirdwebProvider";
 import { botanixChain } from "@/constants/chains";
 import { Account } from "thirdweb/wallets";
+import { toTokens, isAddress } from "thirdweb/utils";
 
 const formSchema = z.object({
   inputTxt: z.string().min(2).max(100),
@@ -91,17 +92,6 @@ export default function Page() {
       return;
     }
 
-    if (!isValidWalletAddress(data[0].address)) {
-      setMessages([
-        ...newMessages,
-        {
-          role: "bot",
-          content: "Invalid address, pls try again",
-        },
-      ]);
-      return;
-    }
-
     switch (data[0].action) {
       case "swap":
         setMessages([
@@ -130,6 +120,16 @@ export default function Page() {
         ]);
         break;
       case "transfer":
+        if (!isValidWalletAddress(data[0].address)) {
+          setMessages([
+            ...newMessages,
+            {
+              role: "bot",
+              content: "Invalid address, pls try again",
+            },
+          ]);
+          return;
+        }
         const tokenAddress = findToken(data[0].token1);
         if (!tokenAddress) {
           setMessages([
@@ -149,34 +149,74 @@ export default function Page() {
           },
         ]);
 
-        // get the contract
         const contract = getContract({
           address: tokenAddress,
           chain: botanixChain,
           client,
         });
 
-        // Call the extension function to prepare the transaction
         const transaction = transfer({
           contract,
           to: data[0].address,
           amount: data[0].amount,
         });
 
-        console.log(transaction, data[0].address, data[0].amount, contract);
-        // Send the transaction
         const transactionResult = await sendTransaction({
           transaction,
           account: account as Account,
         });
-        console.log(transactionResult);
-        break;
-      case "balance":
+
         setMessages([
           ...newMessages,
           {
             role: "bot",
-            content: "Coming soon!",
+            content: `Transaction sent: ${transactionResult.transactionHash}`,
+          },
+        ]);
+        break;
+      case "balance":
+        const tokenAdd = findToken(data[0].token1);
+        if (!tokenAdd) {
+          setMessages([
+            ...newMessages,
+            {
+              role: "bot",
+              content: "Token not found, pls try again",
+            },
+          ]);
+          return;
+        }
+        setMessages([
+          ...newMessages,
+          {
+            role: "bot",
+            content: `Checking balance of ${data[0].token1}`,
+          },
+        ]);
+        const tokenContract = getContract({
+          address: tokenAdd,
+          chain: botanixChain,
+          client,
+        });
+
+        const acc = isAddress(data[0].address)
+          ? data[0].address
+          : account?.address;
+
+        const balance = await balanceOf({
+          contract: tokenContract,
+          address: acc,
+        });
+        const tokenDecimals = await decimals({ contract: tokenContract });
+
+        setMessages([
+          ...newMessages,
+          {
+            role: "bot",
+            content: `Balance of ${acc} is ${toTokens(
+              balance,
+              tokenDecimals
+            )} ${data[0].token1}`,
           },
         ]);
         break;
@@ -223,7 +263,6 @@ export default function Page() {
             </p>
           </div>
           <div className="w-[98%] h-[90%] mx-auto flex flex-col">
-            {/* <div className="flex-1 overflow-scroll py-8 space-y-10"> */}
             <div
               className="flex-1 overflow-scroll py-10 space-y-10"
               ref={containerRef}
@@ -253,7 +292,6 @@ export default function Page() {
                 </div>
               ))}
             </div>
-            {/* </div> */}
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
