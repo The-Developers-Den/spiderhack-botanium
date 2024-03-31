@@ -1,5 +1,13 @@
 "use client";
-import { BotMessageSquare, Box, Cog, CreditCard, Home, Image, Search } from "lucide-react";
+import {
+  BotMessageSquare,
+  Box,
+  Cog,
+  CreditCard,
+  Home,
+  Image,
+  Search,
+} from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { usePathname } from "next/navigation";
@@ -51,7 +59,7 @@ export default function SideBar() {
           },
           {
             name: "Settings",
-            href: "/settings",
+            href: "/",
             color: "text-[#FFB72D]",
 
             icon: <Cog />,
