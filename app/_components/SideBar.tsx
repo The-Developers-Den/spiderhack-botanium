@@ -59,7 +59,7 @@ export default function SideBar() {
           },
           {
             name: "Settings",
-            href: "/",
+            href: "/settings",
             color: "text-[#FFB72D]",
 
             icon: <Cog />,
